@@ -9,6 +9,7 @@
   "author": "La Covideira",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.22.0",
     "express": "^4.17.1"
   }
 }

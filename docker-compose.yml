@@ -8,6 +8,8 @@ services:
 
     node:
         build: ./app
+        volumes:
+            - ./app/app.js:/app/app.js:ro
 
     nginx:
         image: nginx:1.21.3
