@@ -1,0 +1,31 @@
+config:
+  environments:
+    node:
+      target: 'http://localhost:5555'
+      plugins:
+        statsd:
+          host: localhost
+          port: 8125
+          prefix: "artillery-node"
+
+  pool: 50 # All HTTP requests from all virtual users will be sent over the same connections
+
+  phases:
+    - name: Zero
+      duration: 20
+      arrivalRate: 0
+      # etapa de calentamiento para "arrancar" las métricas de Grafana, a veces demora en captar los datos, ya entrada la prueba
+    - name: Ramp
+      duration: 90
+      arrivalRate: 1
+      rampTo: 20
+    - name: Zero
+      duration: 10
+      arrivalRate: 0
+
+
+scenarios:
+  - name: Ramp-request
+    flow:
+      - get:
+          url: '/bbox/1'
